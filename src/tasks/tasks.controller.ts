@@ -40,7 +40,7 @@ export class TasksController {
     return this.tasksService.getTaskById(id);
   }
 
-  @Post()
+  @Post('/')
   @UsePipes(ValidationPipe)
   createTask(@Body() createTaskDTO: CreateTaskDTO): Promise<Task> {
     console.log('body', createTaskDTO);
