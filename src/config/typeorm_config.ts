@@ -1,5 +1,5 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { Task } from 'src/tasks/entities/task.entity';
+import * as path from 'path';
 
 export const MyTypeOrmConfig: TypeOrmModuleOptions = {
   type: 'postgres',
@@ -9,6 +9,6 @@ export const MyTypeOrmConfig: TypeOrmModuleOptions = {
   password: 'tm1319!@12postgres',
   database: 'task_mgt_db1',
   //   entities: [__dirname + '/../../**/*.entity.ts'],
-  entities: [Task],
+  entities: [path.join(__dirname, '../**/entities/*.entity.{ts,js}')],
   synchronize: true,
 };
