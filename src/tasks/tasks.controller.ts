@@ -11,6 +11,7 @@ import {
   ValidationPipe,
   ParseIntPipe,
   UseGuards,
+  HttpCode,
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { TaskStatus } from './task_status_enum';
@@ -21,6 +22,7 @@ import { Task } from './entities/task.entity';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from 'src/auth/entities/user.entity';
 import { GetUser } from 'src/auth/decorators/get-user-decorator';
+import { AdvancedConsoleLogger } from 'typeorm';
 
 @Controller('tasks')
 @UseGuards(AuthGuard())
@@ -32,6 +34,7 @@ export class TasksController {
     @Query(ValidationPipe) filterDto: FilterTasksDTO,
     @GetUser() user: User,
   ): Promise<Task[]> {
+    console.log('get all tasks');
     return this.tasksService.getAllTasks(filterDto, user);
   }
 
@@ -55,8 +58,9 @@ export class TasksController {
   }
 
   @Delete('/:id')
+  @HttpCode(204)
   deleteTaskById(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id') id: number,
     @GetUser() user: User,
   ): Promise<void> {
     return this.tasksService.deleteTaskById(id, user);

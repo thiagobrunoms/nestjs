@@ -5,9 +5,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { MyTypeOrmConfig } from './config/typeorm_config';
 import { AuthModule } from './auth/auth.module';
+import { KafkaModule } from './kafka/kafka.module';
 
 console.log(MyTypeOrmConfig);
 @Module({
-  imports: [TypeOrmModule.forRoot(MyTypeOrmConfig), TasksModule, AuthModule],
+  imports: [TypeOrmModule.forRoot(MyTypeOrmConfig), TasksModule, AuthModule, KafkaModule],
 })
 export class AppModule {}
