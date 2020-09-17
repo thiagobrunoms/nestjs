@@ -9,6 +9,6 @@ import { KafkaModule } from './kafka/kafka.module';
 
 console.log(MyTypeOrmConfig);
 @Module({
-  imports: [TypeOrmModule.forRoot(MyTypeOrmConfig), TasksModule, AuthModule, KafkaModule],
+  imports: [KafkaModule],
 })
 export class AppModule {}

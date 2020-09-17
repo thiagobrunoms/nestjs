@@ -12,13 +12,15 @@ export class KafkaController implements OnModuleInit {
     await this.clientKafka.connect();
   }
 
-  @MessagePattern('new_client_response')
+  @MessagePattern('new_client')
   sendMessage(): void {
     console.log('emiting...');
+
     this.clientKafka.emit('new_client', {
       key: '123',
       value: { data: { age: 34, name: 'thiago' } },
     });
+    return;
   }
 
   @Get('')
